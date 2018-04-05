@@ -1,15 +1,21 @@
 body {
 	background: #95aed6;
 	color: white;
-	margin: 0;	
-}
-header{
-	align:right;
-	width: 70%;
 }
 h1 {
 	color: red;
 	font-size: 100px;
-	margin-top: 0;
-	margin-bottom: 0;
+	margin: 10px;
+	text-align: center;
+}
+.body{
+	background: white;
+	margin: auto;
+	height: 100%;
+	padding: 50px;
+}
+.image-frame{
+	border: 2px solid darkgreen;
+	margin: auto;
+	display: block;
 }
