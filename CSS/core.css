@@ -1,4 +1,15 @@
 body {
-	background: black;
+	background: #95aed6;
 	color: white;
+	margin: 0;	
+}
+header{
+	align:right;
+	width: 70%;
+}
+h1 {
+	color: red;
+	font-size: 100px;
+	margin-top: 0;
+	margin-bottom: 0;
 }
