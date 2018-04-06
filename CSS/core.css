@@ -2,14 +2,7 @@ body {
 	background: #95aed6;
 	color: white;
 }
-h1 {
-	color: red;
-	font-size: 100px;
-	margin: 10px;
-	text-align: center;
-}
 .body{
-	background: white;
 	margin: auto;
 	height: 100%;
 	padding: 50px;
@@ -17,5 +10,7 @@ h1 {
 .image-frame{
 	border: 2px solid darkgreen;
 	margin: auto;
-	display: block;
+}
+.header{
+	background:white;
 }
