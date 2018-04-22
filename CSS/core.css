@@ -1,16 +1,29 @@
 body {
-	background: #95aed6;
-	color: white;
+	background: white;
 }
 .body{
-	margin: auto;
+	margin: 0;
 	height: 100%;
 	padding: 50px;
+	display: inline-block;
+
 }
 .image-frame{
-	border: 2px solid darkgreen;
-	margin: auto;
+	border: 2px solid white;
 }
-.header{
-	background:white;
+.nav{
+	background: lightgrey;
+	border-right: solid 2px grey;
+	height:100vh;
+	max-width:450px;
+}
+div{
+		display: inline-block;
+		padding-bottom: 10px;
+}
+.hor-fill{
+	width:100%
+}
+.home:hover{
+	opacity:0.6;
 }
