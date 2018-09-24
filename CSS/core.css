@@ -1,5 +1,12 @@
-body {
-	background: white;
+html,body{
+  min-height:calc(100vh + 30px);
+  background:black;
+  height:100%;
+  width:100%;
+  color:white;
+  max-width:100%;
+  padding:0px;
+  margin:0px;
 }
 .body{
 	margin: 0;
@@ -12,18 +19,36 @@ body {
 	border: 2px solid white;
 }
 .nav{
-	background: lightgrey;
-	border-right: solid 2px grey;
 	height:100vh;
 	max-width:450px;
+	color: black;
+	display: flex;
+	flex-direction:column;
 }
 div{
-		display: inline-block;
-		padding-bottom: 10px;
+	display: inline-block;
+	padding-bottom: 10px;
 }
 .hor-fill{
 	width:100%
 }
 .home:hover{
 	opacity:0.6;
+}
+.zwei{
+	font-family: 'Montserrat', sans-serif;
+	letter-spacing:10px;
+	font-size:2em;
+ }
+.cont{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	max-width:100%;
+	position: relative;
+	width: 100%; 
+	margin: auto;
+	min-height: 100%; 
+	height: auto !important; 
+	overflow: hidden !important;   
 }
