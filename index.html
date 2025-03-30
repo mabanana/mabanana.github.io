@@ -1,31 +1,343 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Aldwin's Personal Site</title>
-	<link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="CSS/core.css">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aldwin Yu" />
+    <title>Aldwin Yu</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-</head>
-<body>
-	<div class="cont zwei">
-		ALDWIN YU
-	</div>
+      :root {
+        --bg-color: #0a0a0a;
+        --text-color: #ffffff;
+        --accent-color: #0066ff;
+        --secondary-color: #1a1a1a;
+        --button-color: #2d2d2d;
+        --transition: all 0.3s ease;
+      }
 
-	<div class="row">
-		<div class="body col-sm-4 nav">
-			<div>
-				<img class="image-frame hor-fill home" src="i372^cimgpsh_orig.png" alt=""/>
-			</div>
-			<div>
-				<ul class="list-group hor-fill">
-				  <li class="list-group-item home"><span>Resume</span></li>
-				  <li class="list-group-item home"><span>Projects</span></li>
-				</ul>
-			</div>
-		</div>
-		<div class="body col-sm-8 nav">
-		</div>
-	</div>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
 
-</body>
+      .container {
+        max-width: 480px;
+        width: 100%;
+        padding: 40px 20px;
+      }
+
+      .header {
+        margin-bottom: 40px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 3px solid var(--accent-color);
+        overflow: hidden;
+        background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 4px;
+        background: linear-gradient(to right, #fff, #888);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .header p {
+        font-size: 1rem;
+        font-weight: 300;
+        color: #aaa;
+        letter-spacing: 1px;
+      }
+
+      .links {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .link-item {
+        position: relative;
+        border-radius: 12px;
+        background-color: var(--button-color);
+        transition: var(--transition);
+        overflow: hidden;
+      }
+
+      .link-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        background-color: #333;
+      }
+
+      .link-button {
+        display: flex;
+        align-items: center;
+        padding: 14px 18px;
+        width: 100%;
+        text-decoration: none;
+        color: var(--text-color);
+        border: none;
+        background: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.95rem;
+        text-align: left;
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+        z-index: 1;
+      }
+
+      .link-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-right: 12px;
+        border-radius: 8px;
+        background-color: var(--secondary-color);
+        color: var(--accent-color);
+        transition: var(--transition);
+      }
+
+      .link-item:hover .link-icon {
+        background-color: var(--accent-color);
+        color: white;
+      }
+
+      .link-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        background-color: var(--secondary-color);
+        transition: var(--transition);
+      }
+
+      .link-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 102, 255, 0.2);
+      }
+
+      .link-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background-color: var(--accent-color);
+        transition: var(--transition);
+      }
+
+      .link-item:hover::before {
+        width: 100%;
+        opacity: 0.1;
+      }
+
+      .link-text span:first-child {
+        font-weight: 500;
+      }
+
+      .link-text span:last-child {
+        font-size: 0.75rem;
+        opacity: 0.6;
+        margin-top: 2px;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--accent-color);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .footer {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="profile-image">
+          <img
+            src="profileImageUrl"
+            alt="Aldwin Yu"
+            onerror="this.src='/api/placeholder/120/120'; this.onerror=null;"
+          />
+        </div>
+        <h1>ALDWIN YU</h1>
+        <p>SOFTWARE DEVELOPER | ARTIST | TEACHER</p>
+      </div>
+
+      <div class="links">
+        <div class="link-item">
+          <a
+            href="https://www.linkedin.com/in/aldwin-yu-5b4597291/"
+            target="_blank"
+            rel="noopener"
+            class="link-button"
+          >
+            <span class="link-icon"><i class="fab fa-linkedin-in"></i></span>
+            <div class="link-text">
+              <span>LinkedIn</span>
+              <span>Professional Profile</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="link-item">
+          <a
+            href="https://github.com/mabanana"
+            target="_blank"
+            rel="noopener"
+            class="link-button"
+          >
+            <span class="link-icon"><i class="fab fa-github"></i></span>
+            <div class="link-text">
+              <span>GitHub</span>
+              <span>Code Repository</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="link-item">
+          <a
+            href="https://www.youtube.com/@dangboi_talkfast"
+            target="_blank"
+            rel="noopener"
+            class="link-button"
+          >
+            <span class="link-icon"><i class="fab fa-youtube"></i></span>
+            <div class="link-text">
+              <span>YouTube</span>
+              <span>Video Channel</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="link-item">
+          <a
+            href="https://open.spotify.com/artist/360hfHglIWPnOe02nfLiK1?si=UwJNryQQSiqagwOduFoE4A"
+            target="_blank"
+            rel="noopener"
+            class="link-button"
+          >
+            <span class="link-icon"><i class="fab fa-spotify"></i></span>
+            <div class="link-text">
+              <span>Spotify</span>
+              <span>Music Profile</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="link-item">
+          <button
+            class="link-button"
+            onclick="copyToClipboard('aldwin.yu@hotmail.com')"
+          >
+            <span class="link-icon"><i class="fas fa-envelope"></i></span>
+            <div class="link-text">
+              <span>Email</span>
+              <span>aldwin.yu@hotmail.com</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="link-item">
+          <button class="link-button" onclick="copyToClipboard('14167051612')">
+            <span class="link-icon"><i class="fas fa-phone"></i></span>
+            <div class="link-text">
+              <span>Phone</span>
+              <span>(416) 705-1612</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">&copy; 2025 Aldwin Yu</div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            showToast("Copied to clipboard");
+          })
+          .catch(() => {
+            showToast("Failed to copy");
+          });
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.style.opacity = 1;
+
+        clearTimeout(window.toastTimeout);
+        window.toastTimeout = setTimeout(() => {
+          toast.style.opacity = 0;
+        }, 2000);
+      }
+    </script>
+  </body>
 </html>
