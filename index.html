@@ -114,11 +114,23 @@
             </div>
           </button>
         </div>
+        <div class="link-item" max-width="1152px">
+          <button class="link-button" onclick="loadPage()">
+            <span class="link-icon"><i class="fa-solid fa-gamepad"></i></span>
+            <div class="link-text">
+              <span>Godot 4</span>
+              <span>Reaper Game</span>
+            </div>
+          </button>
+        </div>
       </div>
 
       <div class="footer">&copy; 2025 Aldwin Yu</div>
     </div>
-
+    <div class="pop-up" id="gamePopUp">
+      <button class="close-button" onclick="closePage()">x</button>
+      <iframe class="game-frame" id="gameFrame"></iframe>
+    </div>
     <div id="toast" class="toast"></div>
 
     <script>
@@ -142,6 +154,15 @@
         window.toastTimeout = setTimeout(() => {
           toast.style.opacity = 0;
         }, 2000);
+      }
+      function loadPage() {
+        document.getElementById("gameFrame").src =
+          "https://mabanana.github.io/reaper-game";
+        document.getElementById("gamePopUp").style.display = "block";
+      }
+      function closePage() {
+        document.getElementById("gamePopUp").style.display = "none";
+        document.getElementById("gameFrame").src = ""; // Clear the src to stop the game
       }
     </script>
   </body>

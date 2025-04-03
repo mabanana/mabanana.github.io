@@ -5,12 +5,44 @@
 }
 
 :root {
+  /* Base colors */
   --bg-color: #121212;
   --text-color: #eceff4;
   --accent-color: #88c0d0;
   --secondary-color: #1f1f1f;
   --button-color: #2e2e2e;
+
+  /* Additional colors */
+  --hover-color: #383838;
+  --border-color: #333333;
+  --error-color: #bf616a;
+  --success-color: #a3be8c;
+  --warning-color: #ebcb8b;
+  --info-color: #81a1c1;
+
+  /* Text variations */
+  --text-muted: #9ea7b5;
+  --text-faint: #6c7789;
+  --link-color: #88c0d0;
+  --link-hover: #97d3e3;
+
+  /* Backgrounds and surfaces */
+  --card-bg: #1a1a1a;
+  --dropdown-bg: #252525;
+  --tooltip-bg: #3b3b3b;
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+
+  /* Animation */
   --transition: all 0.3s ease;
+  --transition-fast: all 0.15s ease;
+  --transition-slow: all 0.5s ease;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
 }
 
 body {
@@ -193,4 +225,42 @@ body {
   text-align: center;
   font-size: 0.75rem;
   color: #666;
+}
+
+.game-frame {
+  width: 1152px;
+  height: 648px;
+  padding: 20px;
+  margin-top: 20px;
+  border: 2px solid var(--border-color);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pop-up {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--overlay-bg);
+  padding: var(--space-lg);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--button-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 20%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
