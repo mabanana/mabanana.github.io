@@ -232,11 +232,61 @@ body {
   color: #666;
 }
 
-.game-frame {
-  width: 1152px; /* Fixed width */
-  height: 648px; /* Fixed height */
-  display: block;
+.game-container {
+  position: relative;
+  width: fit-content;
   margin: 0 auto;
+}
+
+.game-frame {
+  width: 1152px; /* Original size */
+  height: 648px;
+  border: 2px solid var(--border-color);
+  background: #000;
+  display: block;
+}
+
+.game-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Responsive scaling */
+@media (max-width: 1200px) {
+  .game-frame {
+    width: 960px;
+    height: 540px;
+  }
+}
+
+@media (max-width: 992px) {
+  .game-frame {
+    width: 800px;
+    height: 450px;
+  }
+}
+
+@media (max-width: 832px) {
+  .game-frame {
+    width: calc(100vw - 64px);
+    height: calc((100vw - 64px) * 0.5625); /* Maintain 16:9 ratio */
+  }
+}
+
+/* Fullscreen styles */
+.pop-up.fullscreen {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  border-radius: 0;
+}
+
+.pop-up.fullscreen .game-frame {
+  width: 100vw;
+  height: 100vh;
   border: none;
 }
 
@@ -246,16 +296,12 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--overlay-bg);
-  padding: var(--space-lg);
   padding: 20px;
   border-radius: 12px;
-  border: 3px solid var(--border-color);
-
-  margin-top: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   display: none;
-  /* Remove any width/height constraints here */
+  /* Game container will determine size */
 }
 
 .close-button {
@@ -270,6 +316,24 @@ body {
   height: 30px;
   cursor: pointer;
   font-size: 1.2rem;
+}
+
+.control-button {
+  background-color: var(--button-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.control-button:hover {
+  background-color: var(--hover-color);
 }
 
 /* Responsive adjustments */

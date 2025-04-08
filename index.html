@@ -125,8 +125,21 @@
       </div>
     </div>
     <div class="pop-up" id="gamePopUp">
-      <button class="close-button" onclick="closePage()">x</button>
-      <iframe class="game-frame" id="gameFrame"></iframe>
+      <div class="game-container">
+        <div class="game-controls">
+          <button
+            class="control-button"
+            onclick="toggleFullscreen()"
+            title="Fullscreen"
+          >
+            <i class="fas fa-expand"></i>
+          </button>
+          <button class="control-button" onclick="closePage()" title="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <iframe class="game-frame" id="gameFrame"></iframe>
+      </div>
     </div>
     <div id="toast" class="toast"></div>
 
@@ -152,14 +165,33 @@
           toast.style.opacity = 0;
         }, 2000);
       }
+      function toggleFullscreen() {
+        const popup = document.getElementById("gamePopUp");
+        popup.classList.toggle("fullscreen");
+
+        const button = document.querySelector(".control-button i");
+        if (popup.classList.contains("fullscreen")) {
+          button.classList.remove("fa-expand");
+          button.classList.add("fa-compress");
+        } else {
+          button.classList.remove("fa-compress");
+          button.classList.add("fa-expand");
+        }
+      }
+
       function loadPage() {
         document.getElementById("gameFrame").src =
           "https://mabanana.github.io/reaper-game";
         document.getElementById("gamePopUp").style.display = "block";
+        // Reset fullscreen state when opening
+        document.getElementById("gamePopUp").classList.remove("fullscreen");
       }
+
       function closePage() {
-        document.getElementById("gamePopUp").style.display = "none";
-        document.getElementById("gameFrame").src = ""; // Clear the src to stop the game
+        const popup = document.getElementById("gamePopUp");
+        popup.style.display = "none";
+        popup.classList.remove("fullscreen");
+        document.getElementById("gameFrame").src = "";
       }
     </script>
   </body>
