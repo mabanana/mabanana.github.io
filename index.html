@@ -106,11 +106,23 @@
         </div>
 
         <div class="link-item">
-          <button class="link-button" onclick="loadPage()">
+          <button class="link-button" onclick="loadPage('reaper-game')">
             <span class="link-icon"><i class="fa-solid fa-gamepad"></i></span>
             <div class="link-text">
               <span>Godot 4</span>
               <span>Reaper Game</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="link-item">
+          <button class="link-button" onclick="loadPage('fps-game')">
+            <span class="link-icon"
+              ><i class="fa-solid fa-gamepad" allow="autoplay; fullscreen"></i
+            ></span>
+            <div class="link-text">
+              <span>Godot 4</span>
+              <span>FPS Game</span>
             </div>
           </button>
         </div>
@@ -179,9 +191,14 @@
         }
       }
 
-      function loadPage() {
-        document.getElementById("gameFrame").src =
-          "https://mabanana.github.io/reaper-game";
+      function loadPage(game) {
+        if (game === "fps-game") {
+          document.getElementById("gameFrame").src =
+            "https://mabanana.github.io/FPS-Project-A/";
+        } else if (game === "reaper-game") {
+          document.getElementById("gameFrame").src =
+            "https://mabanana.github.io/reaper-game";
+        }
         document.getElementById("gamePopUp").style.display = "block";
         // Reset fullscreen state when opening
         document.getElementById("gamePopUp").classList.remove("fullscreen");
