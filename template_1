@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizon</title>
+    <style>
+      :root {
+        --green: #4a6e64;
+        --sage: #bccfc2;
+        --cream: #f3f2e9;
+        --stone: #4f4e4a;
+        --light-sage: #e2eae4;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--cream);
+        color: var(--stone);
+        line-height: 1.5;
+        padding: 40px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 60px;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--green);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--stone);
+      }
+
+      .hero {
+        max-width: 600px;
+        margin: 0 auto 40px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 20px;
+        color: var(--green);
+      }
+
+      .hero p {
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--green);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 3px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #3b574f;
+      }
+
+      /* Bento Grid */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: 20px;
+        max-width: 1000px;
+        margin: 0 auto 60px;
+      }
+
+      .bento-item {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .bento-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Grid layout positioning */
+      .item-1 {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+      }
+
+      .item-2 {
+        grid-column: 3 / 5;
+        grid-row: 1 / 2;
+      }
+
+      .item-3 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+
+      .item-4 {
+        grid-column: 2 / 4;
+        grid-row: 2 / 3;
+      }
+
+      .item-5 {
+        grid-column: 4 / 5;
+        grid-row: 2 / 3;
+      }
+
+      .item-6 {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+      }
+
+      .item-7 {
+        grid-column: 3 / 5;
+        grid-row: 3 / 4;
+      }
+
+      /* Content styling */
+      .text-card {
+        padding: 25px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      .text-card h3 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: var(--green);
+      }
+
+      .text-card p {
+        color: var(--stone);
+        margin-bottom: 15px;
+      }
+
+      .text-card .date {
+        color: var(--green);
+        font-size: 0.8rem;
+        margin-top: auto;
+      }
+
+      .image-card {
+        height: 100%;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .image-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: white;
+        padding: 20px;
+      }
+
+      .overlay h3 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .overlay p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      /* Modal for Articles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: white;
+        width: 80%;
+        max-width: 700px;
+        height: 70%;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        color: var(--stone);
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .article-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        color: var(--stone);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .bento-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+
+        .item-1,
+        .item-2,
+        .item-3,
+        .item-4,
+        .item-5,
+        .item-6,
+        .item-7 {
+          grid-column: 1;
+        }
+
+        .item-1 {
+          grid-row: 1;
+        }
+        .item-2 {
+          grid-row: 2;
+        }
+        .item-3 {
+          grid-row: 3;
+        }
+        .item-4 {
+          grid-row: 4;
+        }
+        .item-5 {
+          grid-row: 5;
+        }
+        .item-6 {
+          grid-row: 6;
+        }
+        .item-7 {
+          grid-row: 7;
+        }
+
+        nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">HORIZON</div>
+      <nav>
+        <ul>
+          <li><a href="#features">Lemnistak</a></li>
+          <li><a href="#contact">Nixolent</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Vorstenglar Nimblefrix</h1>
+      <p>
+        Enobarbus clarion wendigo mishegoss. Frabjous omphaloskepsis with
+        quixotic nidificate.
+      </p>
+      <a href="#demo" class="btn">Borborygmus</a>
+    </section>
+
+    <section class="bento-grid">
+      <!-- Item 1: Featured article text card -->
+      <div class="bento-item item-1" onclick="openModal('article1')">
+        <div class="text-card">
+          <div>
+            <h3>Malarkey Hornswoggle Platform</h3>
+            <p>
+              Kerfuffle widdershins gobbledygook bamboozled whippersnapper
+              cattywampus. Discover how enterprises are transforming operations
+              with our innovative solutions.
+            </p>
+          </div>
+          <div class="date">23 Quetzalcoatl, 2025</div>
+        </div>
+      </div>
+
+      <!-- Item 2: App demo screenshot -->
+      <div class="bento-item item-2">
+        <div class="image-card">
+          <img src="/api/placeholder/400/320" alt="Dashboard Interface" />
+          <div class="overlay">
+            <h3>Enterprise Dashboard</h3>
+            <p>Intuitive visualization tools for comprehensive analytics</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3: Small text card -->
+      <div class="bento-item item-3" onclick="openModal('article2')">
+        <div class="text-card">
+          <div>
+            <h3>Rigmarole Updates</h3>
+            <p>Flibbertigibbet discombobulate nincompoop.</p>
+          </div>
+          <div class="date">17 Vexillography, 2025</div>
+        </div>
+      </div>
+
+      <!-- Item 4: App demo gif -->
+      <div class="bento-item item-4">
+        <div class="image-card">
+          <img src="/api/placeholder/400/200" alt="App Workflow Demo" />
+          <div class="overlay">
+            <h3>Workflow Automation Demo</h3>
+            <p>See our intuitive process management in action</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5: Small text card -->
+      <div class="bento-item item-5" onclick="openModal('article3')">
+        <div class="text-card">
+          <div>
+            <h3>Lollygag Guide</h3>
+            <p>Kerfuffle jackanapes cattywampus.</p>
+          </div>
+          <div class="date">5 Hullabaloo, 2025</div>
+        </div>
+      </div>
+
+      <!-- Item 6: App demo image -->
+      <div class="bento-item item-6">
+        <div class="image-card">
+          <img src="/api/placeholder/400/250" alt="Mobile App Interface" />
+          <div class="overlay">
+            <h3>Mobile Integration</h3>
+            <p>Seamless experience across all devices</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 7: Featured article text card -->
+      <div class="bento-item item-7" onclick="openModal('article4')">
+        <div class="text-card">
+          <div>
+            <h3>Snollygoster Implementation Guide</h3>
+            <p>
+              Mollycoddle mumpsimus whirligig poppycock gobbledygook taradiddle.
+              Learn how to maximize value with our strategic deployment
+              methodology.
+            </p>
+          </div>
+          <div class="date">42 Razzmatazz, 2025</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for Articles -->
+    <div id="articleModal" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        <iframe id="articleFrame" class="article-iframe" src=""></iframe>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Quetzalcoatl. Lollygag bamboozled.</p>
+    </footer>
+
+    <script>
+      // Article modal functionality
+      function openModal(articleId) {
+        const modal = document.getElementById("articleModal");
+        const iframe = document.getElementById("articleFrame");
+
+        // Set the iframe content based on which article was clicked
+        const articleContents = {
+          article1: `
+                    <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                padding: 40px;
+                                background-color: #f9f9f9;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                line-height: 1.6;
+                            }
+                            h1 {
+                                color: #4A6E64;
+                                font-weight: 300;
+                                margin-bottom: 20px;
+                            }
+                            h2 {
+                                color: #4A6E64;
+                                font-weight: 400;
+                                margin: 30px 0 15px;
+                            }
+                            p {
+                                margin-bottom: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Malarkey Hornswoggle Platform: Enterprise Solutions</h1>
+                        <p>Quetzalcoatl ranivorous cattywampus lollygag bamboozled. Kerfuffle widdershins gobbledygook whippersnapper. Discombobulate jackanapes flibbertigibbet hullabaloo xertz malapert.</p>
+                        <h2>Enobarbus Clarion Integration</h2>
+                        <p>Nincompoop taradiddle higgledy-piggledy tergiversation. Brouhaha rigmarole razzmatazz. Whirligig widdershins cattywampus hornswoggle flocculent zabernism triskaidekaphobia metagrobolize flummox.</p>
+                        <h2>Deployment Architecture</h2>
+                        <p>Absquatulate sesquipedalian snollygoster pettifogger. Cattywampus kerfuffle bamboozled. Codswallop skedaddle whippersnapper!</p>
+                        <p>Mollycoddle mumpsimus jackanapes discombobulate. Bibble whippersnapper poppycock. Gobbledygook taradiddle higgledy-piggledy obstreperous tergiversation.</p>
+                    </body>
+                    </html>
+                `,
+          article2: `
+                    <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                padding: 40px;
+                                background-color: #f9f9f9;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                line-height: 1.6;
+                            }
+                            h1 {
+                                color: #4A6E64;
+                                font-weight: 300;
+                                margin-bottom: 20px;
+                            }
+                            p {
+                                margin-bottom: 20px;
+                            }
+                            ul {
+                                margin-bottom: 20px;
+                                padding-left: 20px;
+                            }
+                            li {
+                                margin-bottom: 10px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Rigmarole Updates: Release Notes</h1>
+                        <p>Flibbertigibbet discombobulate nincompoop. Taradiddle bamboozled whippersnapper hornswoggle gobbledygook xertz malapert borborygmus.</p>
+                        <ul>
+                            <li><strong>Cattywampus Integration:</strong> Kerfuffle widdershins lollygag</li>
+                            <li><strong>Jackanapes Module:</strong> Flibbertigibbet hullabaloo triskaidekaphobia</li>
+                            <li><strong>Security Updates:</strong> Metagrobolize flummox absquatulate</li>
+                        </ul>
+                        <p>Sesquipedalian snollygoster pettifogger higgledy-piggledy tergiversation. Brouhaha rigmarole cattywampus razzmatazz whirligig widdershins.</p>
+                    </body>
+                    </html>
+                `,
+          article3: `
+                    <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                padding: 40px;
+                                background-color: #f9f9f9;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                line-height: 1.6;
+                            }
+                            h1 {
+                                color: #4A6E64;
+                                font-weight: 300;
+                                margin-bottom: 20px;
+                            }
+                            h2 {
+                                color: #4A6E64;
+                                font-weight: 400;
+                                margin: 30px 0 15px;
+                            }
+                            p {
+                                margin-bottom: 20px;
+                            }
+                            .note {
+                                background-color: #E2EAE4;
+                                padding: 15px;
+                                border-radius: 5px;
+                                margin-bottom: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Lollygag Guide: Quick Start</h1>
+                        <p>Kerfuffle jackanapes cattywampus gobbledygook hullabaloo bamboozled. Xertz malapert borborygmus whippersnapper discombobulate.</p>
+                        <div class="note">
+                            <p><strong>Note:</strong> Absquatulate sesquipedalian snollygoster before proceeding.</p>
+                        </div>
+                        <h2>Getting Started</h2>
+                        <p>Pettifogger higgledy-piggledy tergiversation. Brouhaha rigmarole cattywampus razzmatazz whirligig widdershins hornswoggle!</p>
+                        <h2>Configuration</h2>
+                        <p>Taradiddle bamboozled whippersnapper flocculent zabernism triskaidekaphobia metagrobolize flummox.</p>
+                    </body>
+                    </html>
+                `,
+          article4: `
+                    <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                padding: 40px;
+                                background-color: #f9f9f9;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                line-height: 1.6;
+                            }
+                            h1 {
+                                color: #4A6E64;
+                                font-weight: 300;
+                                margin-bottom: 20px;
+                            }
+                            h2 {
+                                color: #4A6E64;
+                                font-weight: 400;
+                                margin: 30px 0 15px;
+                            }
+                            p {
+                                margin-bottom: 20px;
+                            }
+                            .steps {
+                                counter-reset: step-counter;
+                                margin-bottom: 20px;
+                            }
+                            .step {
+                                margin-bottom: 15px;
+                                position: relative;
+                                padding-left: 35px;
+                            }
+                            .step:before {
+                                content: counter(step-counter);
+                                counter-increment: step-counter;
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                width: 25px;
+                                height: 25px;
+                                background-color: #4A6E64;
+                                color: white;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 14px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Snollygoster Implementation Guide</h1>
+                        <p>Mollycoddle mumpsimus whirligig poppycock gobbledygook taradiddle. Higgledy-piggledy obstreperous tergiversation.</p>
+                        <h2>Implementation Process</h2>
+                        <div class="steps">
+                            <div class="step">
+                                <p><strong>Fuddy-duddy hullabaloo:</strong> Cattywampus widdershins. Codswallop skedaddle pettifogger with full documentation.</p>
+                            </div>
+                            <div class="step">
+                                <p><strong>Blatherskite mollycoddle:</strong> Whippersnapper discombobulate. Bibble cattywampus poppycock gobbledygook.</p>
+                            </div>
+                            <div class="step">
+                                <p><strong>Taradiddle higgledy-piggledy:</strong> Obstreperous tergiversation. Fuddy-duddy hullabaloo cattywampus widdershins.</p>
+                            </div>
+                        </div>
+                        <h2>Best Practices</h2>
+                        <p>Codswallop skedaddle pettifogger whippersnapper discombobulate kerfuffle jackanapes cattywampus!</p>
+                    </body>
+                    </html>
+                `,
+        };
+
+        // Create a blob URL for the HTML content
+        const blob = new Blob([articleContents[articleId]], {
+          type: "text/html",
+        });
+        const url = URL.createObjectURL(blob);
+
+        // Set the iframe src to the blob URL
+        iframe.src = url;
+
+        // Display the modal
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("articleModal");
+        const iframe = document.getElementById("articleFrame");
+
+        // Clear the iframe source
+        iframe.src = "";
+
+        // Hide the modal
+        modal.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
