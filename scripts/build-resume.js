@@ -141,7 +141,32 @@ function contactToInlineHtml(contactLine) {
   return marked.parseInline(contactLine);
 }
 
-// ── Plain (ATS) builder ──────────────────────────────────────────────────────
+// ── Security helpers ─────────────────────────────────────────────────────────
+
+/** Strip HTML tags and decode common entities to get plain text. */
+function stripHtml(html) {
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&amp;/g,  '&')
+    .replace(/&lt;/g,   '<')
+    .replace(/&gt;/g,   '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g,  "'")
+    .replace(/&nbsp;/g, ' ')
+    .trim();
+}
+
+/** Escape special HTML characters to prevent injection. */
+function escapeHtml(str) {
+  return str
+    .replace(/&/g,  '&amp;')
+    .replace(/</g,  '&lt;')
+    .replace(/>/g,  '&gt;')
+    .replace(/"/g,  '&quot;')
+    .replace(/'/g,  '&#39;');
+}
+
+
 
 function buildPlainHtml(parsed) {
   const { name, contactLine, sections } = parsed;
@@ -179,10 +204,10 @@ function buildDesignedHtml(parsed) {
   const summarySection = sections.find(s => s.heading.toLowerCase() === 'summary');
   if (summarySection) {
     // Extract first sentence of plain text as a title hint (keep short)
-    const plain = summarySection.htmlContent.replace(/<[^>]+>/g, '');
+    const plain = stripHtml(summarySection.htmlContent);
     const firstSentence = plain.split(/[.!?]/)[0].trim();
     if (firstSentence.length > 0 && firstSentence.length < 80) {
-      title = firstSentence;
+      title = escapeHtml(firstSentence);
     }
   }
 
@@ -201,16 +226,18 @@ function buildDesignedHtml(parsed) {
         const skillsHtml = sec.htmlContent.replace(
           /<li>([\s\S]*?)<\/li>/g,
           (_, content) => {
+            // Strip any HTML tags, then re-wrap as safe skill tags
+            const text  = stripHtml(content);
             // Split "Category: item1, item2" into tags
-            const parts = content.split(':');
-            if (parts.length === 2) {
-              const category = parts[0].trim();
-              const tags = parts[1].split(',').map(t =>
-                `<span class="skill-tag">${t.trim()}</span>`
+            const parts = text.split(':');
+            if (parts.length >= 2) {
+              const category = escapeHtml(parts[0].trim());
+              const tags = parts.slice(1).join(':').split(',').map(t =>
+                `<span class="skill-tag">${escapeHtml(t.trim())}</span>`
               ).join('');
               return `<li><strong>${category}</strong><br>${tags}</li>`;
             }
-            return `<li><span class="skill-tag">${content}</span></li>`;
+            return `<li><span class="skill-tag">${escapeHtml(text)}</span></li>`;
           }
         );
         sidebarExtra += skillsHtml;
