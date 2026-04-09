@@ -1,0 +1,16 @@
+{
+  "name": "mabanana-resume-builder",
+  "version": "1.0.0",
+  "description": "Build ATS and designed resume PDFs from Markdown via Playwright",
+  "private": true,
+  "scripts": {
+    "build:resume": "node scripts/build-resume.js"
+  },
+  "dependencies": {
+    "marked": "^12.0.0",
+    "playwright": "^1.55.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{NAME}} — Resume (ATS)</title>
+  <style>
+    /* Inline the CSS at build time so the PDF is fully self-contained */
+    {{CSS}}
+  </style>
+</head>
+<body>
+  <div class="resume-header">
+    <h1>{{NAME}}</h1>
+    <div class="contact-line">{{CONTACT}}</div>
+  </div>
+  {{BODY}}
+</body>
+</html>
