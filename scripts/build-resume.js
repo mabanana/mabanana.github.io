@@ -143,20 +143,22 @@ function contactToInlineHtml(contactLine) {
 
 // ── Security helpers ─────────────────────────────────────────────────────────
 
-/** Strip HTML tags and decode common entities to get plain text. */
-function stripHtml(html) {
-  return html
-    .replace(/<[^>]*>/g, '')
-    .replace(/&amp;/g,  '&')
-    .replace(/&lt;/g,   '<')
-    .replace(/&gt;/g,   '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g,  "'")
-    .replace(/&nbsp;/g, ' ')
-    .trim();
+/** Strip HTML tags, returning text that still contains HTML-encoded entities.
+ *  The result is safe to embed directly in HTML (entities remain encoded). */
+function stripHtmlTags(html) {
+  // Use a repeated replace to handle nested/malformed tags safely
+  let prev;
+  let str = html;
+  do {
+    prev = str;
+    str  = str.replace(/<[^>]*>/g, '');
+  } while (str !== prev);
+  return str.trim();
 }
 
-/** Escape special HTML characters to prevent injection. */
+/** Escape special HTML characters to prevent injection.
+ *  Only call this on raw plain-text strings that have NOT already been
+ *  HTML-encoded (e.g. direct user input, never on marked HTML output). */
 function escapeHtml(str) {
   return str
     .replace(/&/g,  '&amp;')
@@ -203,11 +205,13 @@ function buildDesignedHtml(parsed) {
   let title = 'Software Engineer'; // fallback
   const summarySection = sections.find(s => s.heading.toLowerCase() === 'summary');
   if (summarySection) {
-    // Extract first sentence of plain text as a title hint (keep short)
-    const plain = stripHtml(summarySection.htmlContent);
+    // Extract first sentence of plain text as a title hint (keep short).
+    // stripHtmlTags preserves HTML entity encoding, making the result safe to
+    // embed directly into an HTML attribute/element without further escaping.
+    const plain = stripHtmlTags(summarySection.htmlContent);
     const firstSentence = plain.split(/[.!?]/)[0].trim();
     if (firstSentence.length > 0 && firstSentence.length < 80) {
-      title = escapeHtml(firstSentence);
+      title = firstSentence;
     }
   }
 
@@ -226,18 +230,19 @@ function buildDesignedHtml(parsed) {
         const skillsHtml = sec.htmlContent.replace(
           /<li>([\s\S]*?)<\/li>/g,
           (_, content) => {
-            // Strip any HTML tags, then re-wrap as safe skill tags
-            const text  = stripHtml(content);
+            // Strip HTML tags; entities remain encoded so the result is
+            // already HTML-safe — no further escaping is needed.
+            const text  = stripHtmlTags(content);
             // Split "Category: item1, item2" into tags
-            const parts = text.split(':');
-            if (parts.length >= 2) {
-              const category = escapeHtml(parts[0].trim());
-              const tags = parts.slice(1).join(':').split(',').map(t =>
-                `<span class="skill-tag">${escapeHtml(t.trim())}</span>`
+            const colonIdx = text.indexOf(':');
+            if (colonIdx !== -1) {
+              const category = text.slice(0, colonIdx).trim();
+              const tags = text.slice(colonIdx + 1).split(',').map(t =>
+                `<span class="skill-tag">${t.trim()}</span>`
               ).join('');
               return `<li><strong>${category}</strong><br>${tags}</li>`;
             }
-            return `<li><span class="skill-tag">${escapeHtml(text)}</span></li>`;
+            return `<li><span class="skill-tag">${text}</span></li>`;
           }
         );
         sidebarExtra += skillsHtml;
