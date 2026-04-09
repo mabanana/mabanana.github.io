@@ -186,7 +186,7 @@ function buildPlainHtml(parsed) {
 
   return template
     .replace('{{CSS}}',     css)
-    .replace('{{NAME}}',    name)
+    .replaceAll('{{NAME}}', name)
     .replace('{{CONTACT}}', contactToInlineHtml(contactLine))
     .replace('{{BODY}}',    body);
 }
@@ -270,7 +270,7 @@ function buildDesignedHtml(parsed) {
 
   return template
     .replace('{{CSS}}',           css)
-    .replace('{{NAME}}',          name)
+    .replaceAll('{{NAME}}',       name)
     .replace('{{TITLE}}',         title)
     .replace('{{CONTACT_BLOCK}}', contactBlock)
     .replace('{{SIDEBAR_EXTRA}}', sidebarExtra)

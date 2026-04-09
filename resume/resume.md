@@ -12,7 +12,7 @@
 
 ## Summary
 
-Software engineer with experience owning production systems end-to-end, including design, implementation, deployment, and maintenance. Proven ability to deliver measurable operational impact through automation, performance optimization, and workflow improvements. Experienced collaborating with non-technical stakeholders and maintaining production codebases with minimal supervision.
+Full-stack software engineer with production experience in TypeScript, Node.js, Python, and Django, building scalable back-end systems and web applications in the education technology sector. Proven track record delivering measurable impact through automation, performance optimization, and API-driven architecture. Experienced owning systems end-to-end — from database design and server-side logic to deployment and stakeholder collaboration — with a strong foundation in software engineering principles and the full SDLC.
 
 ---
 
@@ -21,10 +21,12 @@ Software engineer with experience owning production systems end-to-end, includin
 ### Software Engineer / Full-Stack Developer — RoboEdu
 **Sep 2024 – Present** | East York, ON
 
-- Owned development of a Django-based production web application supporting core business operations
+- Owned end-to-end development of a Django/Python web application supporting core business operations in education technology
+- Built and maintained REST APIs consumed by front-end clients; enforced clean separation between server-side logic and API layer
 - Automated previously manual workflows for assignment distribution, grading, feedback, and recurring communications
 - Reduced over 40 hours per week of manual administrative work, enabling operational scaling without additional staff
-- Designed and optimized database schemas; reduced long-running queries from ~25 seconds to <1 second
+- Designed and optimized PostgreSQL database schemas; reduced long-running queries from ~25 seconds to <1 second
+- Deployed and maintained the application on Linux-based infrastructure using Docker for consistent, reproducible environments
 - Worked directly with stakeholders to gather requirements and deliver features end-to-end
 - Wrote and maintained technical documentation to support future development and maintenance
 
@@ -48,21 +50,21 @@ Software engineer with experience owning production systems end-to-end, includin
 
 ## Skills
 
-**Languages:** Python, JavaScript, TypeScript, GDScript, C++, SQL
-**Frameworks & Platforms:** Django, React, Node.js, Godot Engine
-**Software Engineering:** REST APIs, OOP, data structures, unit testing
-**Tools & Practices:** Git, Docker, CI workflows, game editor tooling, data pipelines, documentation
+**Languages:** TypeScript, JavaScript, Python, SQL, GDScript, C++, HTML, CSS
+**Back-End & Frameworks:** Node.js, Django, REST APIs, server-side architecture
 **Databases:** PostgreSQL, SQLite
-**Methodologies:** Agile-style iteration, stakeholder-driven requirements
+**DevOps & Infrastructure:** Docker, Linux, Git, CI workflows
+**Software Engineering:** OOP, data structures, system design, unit testing, full SDLC
+**Methodologies:** Agile-style iteration, stakeholder-driven requirements, technical documentation
 
 ---
 
 ## Projects
 
 ### Serverless REST API – Email Summarization Service
-**Tech:** TypeScript, Fermyon Cloud (Spin), OAuth 2.0, Gmail API
+**Tech:** TypeScript, Node.js, Fermyon Cloud (Spin), OAuth 2.0, Gmail API
 
-- Designed and implemented a serverless REST API end-to-end using Fermyon Spin and TypeScript
+- Designed and implemented a serverless REST API end-to-end using TypeScript and Node.js (Fermyon Spin runtime)
 - Integrated webhook-based requests from a Telegram bot to trigger API workflows
 - Implemented OAuth 2.0 authentication to securely access the Gmail API
 - Ensured no user data is persisted, storing only access and refresh tokens using Fermyon key-value storage
