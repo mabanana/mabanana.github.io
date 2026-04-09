@@ -3,12 +3,16 @@ name: Build Resume PDFs
 # ── Triggers ──────────────────────────────────────────────────────────────────
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths-ignore:
       # Avoid infinite loop: skip when only the generated PDFs changed
       - 'Assets/Resume-ATS.pdf'
       - 'Assets/Resume-Designed.pdf'
   workflow_dispatch:
+
+# ── Opt into Node.js 24 for JavaScript-based actions ─────────────────────────
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 # ── Permissions ───────────────────────────────────────────────────────────────
 permissions:
@@ -30,7 +34,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       # 3. Install Node dependencies (including Playwright)
