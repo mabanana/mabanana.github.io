@@ -1,0 +1,113 @@
+/* ============================================================
+   ATS-FIRST PLAIN RESUME STYLES
+   Goal: maximum text selectability, zero layout tricks that
+   confuse automated applicant tracking systems.
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@page {
+  size: letter;
+  margin: 0.75in 0.75in 0.75in 0.75in;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11pt;
+  line-height: 1.4;
+  color: #000;
+  background: #fff;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.resume-header {
+  text-align: center;
+  margin-bottom: 12pt;
+}
+
+.resume-header h1 {
+  font-size: 20pt;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-bottom: 4pt;
+}
+
+.contact-line {
+  font-size: 10pt;
+  color: #333;
+}
+
+.contact-line a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* ── Horizontal rule ──────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid #000;
+  margin: 6pt 0;
+}
+
+/* ── Section headings ─────────────────────────────────────── */
+h2 {
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2pt;
+  margin-top: 10pt;
+  margin-bottom: 6pt;
+}
+
+/* ── Job entries ──────────────────────────────────────────── */
+h3 {
+  font-size: 11pt;
+  font-weight: bold;
+  margin-top: 6pt;
+  margin-bottom: 2pt;
+}
+
+.job-meta {
+  font-size: 10pt;
+  color: #333;
+  margin-bottom: 4pt;
+}
+
+/* ── Lists ────────────────────────────────────────────────── */
+ul {
+  margin-left: 18pt;
+  margin-bottom: 6pt;
+}
+
+li {
+  margin-bottom: 2pt;
+}
+
+/* ── Paragraphs ───────────────────────────────────────────── */
+p {
+  margin-bottom: 6pt;
+}
+
+/* ── Page break control ───────────────────────────────────── */
+h2 {
+  page-break-after: avoid;
+}
+
+h3 {
+  page-break-after: avoid;
+}
+
+ul,
+li {
+  page-break-inside: avoid;
+}
+
+.section {
+  page-break-inside: avoid;
+}

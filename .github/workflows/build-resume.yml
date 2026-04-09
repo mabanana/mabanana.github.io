@@ -1,0 +1,63 @@
+name: Build Resume PDFs
+
+# ── Triggers ──────────────────────────────────────────────────────────────────
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      # Avoid infinite loop: skip when only the generated PDFs changed
+      - 'Assets/Resume-ATS.pdf'
+      - 'Assets/Resume-Designed.pdf'
+  workflow_dispatch:
+
+# ── Permissions ───────────────────────────────────────────────────────────────
+permissions:
+  contents: write   # needed to commit PDFs back to the repo
+
+jobs:
+  build-resume:
+    name: Generate Resume PDFs
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history lets the commit step work reliably
+
+      # 2. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Install Node dependencies (including Playwright)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Install Playwright's bundled Chromium browser
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      # 5. Build both PDFs from resume/resume.md
+      - name: Build resume PDFs
+        run: npm run build:resume
+
+      # 6. Commit generated PDFs back to the branch
+      #    • Skips commit when there are no changes (e.g., content unchanged)
+      #    • The [skip ci] tag prevents this commit from re-triggering the
+      #      workflow on branches that don't filter by paths-ignore.
+      - name: Commit generated PDFs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Assets/Resume-ATS.pdf Assets/Resume-Designed.pdf
+          # Only commit if something actually changed
+          if git diff --cached --quiet; then
+            echo "No changes to PDFs – nothing to commit."
+          else
+            git commit -m "chore: regenerate resume PDFs [skip ci]"
+            git push
+          fi
