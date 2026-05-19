@@ -63,5 +63,8 @@ jobs:
             echo "No changes to PDFs – nothing to commit."
           else
             git commit -m "chore: regenerate resume PDFs [skip ci]"
+            # Pull before pushing to handle cases where remote was updated
+            # since the workflow started
+            git pull --rebase
             git push
           fi
