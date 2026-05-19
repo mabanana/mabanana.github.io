@@ -6,7 +6,7 @@
 
 ## Summary
 
-Full-stack software engineer with production experience building business-critical web applications, REST APIs, and database-backed systems in Java, Python, TypeScript, and Node.js. Track record of delivering measurable impact through automation, performance optimization, and clean API architecture — including reducing over 40 hours of weekly manual work through end-to-end system ownership. Experienced with Docker, Linux, PostgreSQL, and CI/CD pipelines. Taught Java and Python at the competitive programming level; strong technical fundamentals across both languages. Fast learner actively building toward Spring Boot, React, and cloud-native development.
+Full-stack software engineer with production experience building business-critical web applications, REST APIs, and database-backed systems in Java, Python, TypeScript, and Node.js. Track record of delivering measurable impact through automation, performance optimization, and clean API architecture — including reducing over 40 hours of weekly manual work through end-to-end system ownership. Experienced with Docker, Linux, PostgreSQL, CI/CD pipelines, comprehensive application logging, and production refactoring driven by system observability. Taught Java and Python at the competitive programming level; strong technical fundamentals across both languages. Fast learner actively building toward Spring Boot, React, and cloud-native development.
 
 ---
 
@@ -23,6 +23,8 @@ Full-stack software engineer with production experience building business-critic
 - Configured GitHub Actions CI pipeline including Django configuration checks, migration validation, smoke tests, test suite execution, and static asset validation
 - Deployed and maintained the application on Linux using Docker and Render; managed environment-driven production settings and secrets configuration
 - Implemented auth and account management workflows including login, password reset, token handling, and rate limiting; built SMTP-based email notification and templated communication systems
+- Added comprehensive application logging and monitoring workflows to quickly pinpoint production issues, evaluate feature effectiveness, and guide targeted refactors of underperforming system areas
+- Applied an AI-heavy workflow to accelerate implementation and operational tasks while focusing personal effort on system design, architecture, and higher-leverage engineering decisions
 
 ### Lead Programmer — Outlaw Odyssey (Production Indie Project)
 **Jun 2025 – Present** | Remote
@@ -30,7 +32,7 @@ Full-stack software engineer with production experience building business-critic
 - Designed and implemented a turn-based combat system with MVC-style separation between combat logic, event/action queues, animation flow, UI, and scene layout
 - Built an internal combat testing tool enabling configurable encounters with reusable player data injection for fast iteration, balancing, and regression testing without launching the full game
 - Developed tooling to recalculate character stats from level curves, supporting data-driven gameplay balancing workflows
-- Created reusable shader-support tooling for animated sprite behavior, enabling a previously blocked team member to independently author shader-driven animations and increasing animation output by over 100%
+- Created reusable shader-support tooling for animated sprite behavior, enabling a previously blocked team member to independently author shader-driven animations
 - Integrated combat systems into overall game flow and scene transitions; collaborated with designers and artists on iterative feature development
 
 ### Instructor — Java & Python, Competitive Programming Preparation
