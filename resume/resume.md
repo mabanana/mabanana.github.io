@@ -1,9 +1,3 @@
-<!--
-  TODO: Replace all placeholder content below with your actual resume information.
-  Each section is marked with TODO so you know exactly where to update.
-  This file is the single source of truth — both PDFs are generated from here.
--->
-
 # Aldwin Von Yu
 
 **Email:** aldwin.yu@hotmail.com &nbsp;|&nbsp; **GitHub:** github.com/mabanana &nbsp;|&nbsp; **Location:** Toronto, Canada
@@ -12,33 +6,38 @@
 
 ## Summary
 
-Full-stack software engineer with production experience in TypeScript, Node.js, Python, and Django, building scalable back-end systems and web applications in the education technology sector. Proven track record delivering measurable impact through automation, performance optimization, and API-driven architecture. Experienced owning systems end-to-end — from database design and server-side logic to deployment and stakeholder collaboration — with a strong foundation in software engineering principles and the full SDLC.
+Full-stack software engineer with production experience building business-critical web applications, REST APIs, and database-backed systems in Java, Python, TypeScript, and Node.js. Track record of delivering measurable impact through automation, performance optimization, and clean API architecture — including reducing over 40 hours of weekly manual work through end-to-end system ownership. Experienced with Docker, Linux, PostgreSQL, and CI/CD pipelines. Taught Java and Python at the competitive programming level; strong technical fundamentals across both languages. Fast learner actively building toward Spring Boot, React, and cloud-native development.
 
 ---
 
 ## Experience
 
-### Software Engineer / Full-Stack Developer — RoboEdu
+### Software Engineer / Full-Stack Developer — RoboEdu / VertexStem
 **Sep 2024 – Present** | East York, ON
 
-- Owned end-to-end development of a Django/Python web application supporting core business operations in education technology
-- Built and maintained REST APIs consumed by front-end clients; enforced clean separation between server-side logic and API layer
-- Automated previously manual workflows for assignment distribution, grading, feedback, and recurring communications
-- Reduced over 40 hours per week of manual administrative work, enabling operational scaling without additional staff
-- Designed and optimized PostgreSQL database schemas; reduced long-running queries from ~25 seconds to <1 second
-- Deployed and maintained the application on Linux-based infrastructure using Docker for consistent, reproducible environments
-- Worked directly with stakeholders to gather requirements and deliver features end-to-end
-- Wrote and maintained technical documentation to support future development and maintenance
+- Built and maintained a production Django web application supporting class scheduling, homework delivery, student submissions, grading, attendance tracking, and operational communications
+- Developed and maintained REST API endpoints for schedule management, attendance, submission, and worksheet workflows; enforced clean separation between business logic and API layers
+- Implemented Docker-based isolated execution environments for Java and Python student code, enabling safe and reproducible server-side evaluation of submitted programs
+- Automated assignment distribution, grading, feedback, and recurring administrative communications — eliminating over 40 hours of weekly manual work and enabling operational scaling without additional staff
+- Designed and optimized PostgreSQL database schemas and queries; reduced long-running queries from ~25 seconds to under 1 second through targeted data-model improvements
+- Configured GitHub Actions CI pipeline including Django configuration checks, migration validation, smoke tests, test suite execution, and static asset validation
+- Deployed and maintained the application on Linux using Docker and Render; managed environment-driven production settings and secrets configuration
+- Implemented auth and account management workflows including login, password reset, token handling, and rate limiting; built SMTP-based email notification and templated communication systems
 
----
-
-### Gameplay Programmer — Outlaw Odyssey (Production Indie Project)
+### Lead Programmer — Outlaw Odyssey (Production Indie Project)
 **Jun 2025 – Present** | Remote
 
-- Developed and maintained gameplay systems using object-oriented and data-driven design
-- Built internal testing and tooling systems to validate complex logic outside the runtime environment
-- Collaborated with designers and artists to iterate on features and tooling based on production needs
-- Used Git-based version control and followed structured iteration and testing practices
+- Designed and implemented a turn-based combat system with MVC-style separation between combat logic, event/action queues, animation flow, UI, and scene layout
+- Built an internal combat testing tool enabling configurable encounters with reusable player data injection for fast iteration, balancing, and regression testing without launching the full game
+- Developed tooling to recalculate character stats from level curves, supporting data-driven gameplay balancing workflows
+- Created reusable shader-support tooling for animated sprite behavior, enabling a previously blocked team member to independently author shader-driven animations and increasing animation output by over 100%
+- Integrated combat systems into overall game flow and scene transitions; collaborated with designers and artists on iterative feature development
+
+### Instructor — Java & Python, Competitive Programming Preparation
+**Ongoing** | Toronto, ON
+
+- Taught data structures and algorithms in Java and Python to students preparing for ACSL (American Computer Science League) and CCC (Canadian Computing Competition)
+- Designed and delivered lessons on core CS fundamentals including sorting, searching, recursion, and graph traversal using Java and Python implementations
 
 ---
 
@@ -50,12 +49,13 @@ Full-stack software engineer with production experience in TypeScript, Node.js, 
 
 ## Skills
 
-**Languages:** TypeScript, JavaScript, Python, SQL, GDScript, C++, HTML, CSS
-**Back-End & Frameworks:** Node.js, Django, REST APIs, server-side architecture
+**Languages:** Java, Python, TypeScript, JavaScript, SQL, HTML, CSS, GDScript
+**Back-End & Frameworks:** Django, Node.js, REST APIs, server-side architecture
 **Databases:** PostgreSQL, SQLite
-**DevOps & Infrastructure:** Docker, Linux, Git, CI workflows
-**Software Engineering:** OOP, data structures, system design, unit testing, full SDLC
-**Methodologies:** Agile-style iteration, stakeholder-driven requirements, technical documentation
+**DevOps & Infrastructure:** Docker, Linux, Git, GitHub Actions CI/CD
+**Software Engineering:** OOP, data structures & algorithms, system design, unit testing, full SDLC
+**Learning Focus:** Spring Boot, React, OpenShift, cloud-native development, LLM / Generative AI concepts
+**Methodologies:** Agile delivery, stakeholder-driven requirements, technical documentation
 
 ---
 
@@ -64,35 +64,8 @@ Full-stack software engineer with production experience in TypeScript, Node.js, 
 ### Serverless REST API – Email Summarization Service
 **Tech:** TypeScript, Node.js, Fermyon Cloud (Spin), OAuth 2.0, Gmail API
 
-- Designed and implemented a serverless REST API end-to-end using TypeScript and Node.js (Fermyon Spin runtime)
-- Integrated webhook-based requests from a Telegram bot to trigger API workflows
-- Implemented OAuth 2.0 authentication to securely access the Gmail API
-- Ensured no user data is persisted, storing only access and refresh tokens using Fermyon key-value storage
-- Implemented scheduled execution via cron-triggered API calls to process unread emails
-- Designed async request handling to minimize execution time and serverless resource usage
-- Implemented structured error handling and logging across API boundaries
-
----
-
-### Combat Simulation & Testing Tool
-**Tech:** GDScript, Godot
-
-- Developed a combat testing tool that wraps the live turn-based combat system without launching the rest of the game
-- Executes full combat sequences directly using the current codebase by injecting game state data customizable via GUI
-- Enabled a major gameplay redesign after multiple iterations of feedback from play testers; became the singular tool for all combat system testing
-
----
-
-### CSV to In-Game Data Pipeline
-**Tech:** Python, GDScript, VBA, System Design
-
-- Built a custom validation-enabled spreadsheet → Python → GDScript pipeline to convert Excel data into in-game data formats
-- Enabled unsupervised data authoring and integration without programmer intervention, generating four pull requests for gameplay changes that otherwise would not have occurred
-
----
-
-### Shader Animation Authoring Tool
-**Tech:** GLSL, GDScript
-
-- Created a tool exposing shader animation behaviour through an animation editor UI
-- Enabled a previously blocked team member to author and tweak shader-driven animations independently, increasing animation creation speed by over 100%
+- Designed and implemented a serverless REST API end-to-end using TypeScript and Node.js
+- Integrated webhook-based requests from a Telegram bot to trigger multi-system API workflows
+- Implemented OAuth 2.0 authentication to securely access the Gmail API; stored tokens using Fermyon key-value storage without persisting user data
+- Implemented cron-triggered scheduled execution and async request handling to minimize execution time and serverless resource usage
+- Applied structured error handling and logging across API boundaries; built around AI-adjacent email summarization workflows demonstrating practical familiarity with LLM-driven automation patterns
