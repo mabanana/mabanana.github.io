@@ -77,19 +77,67 @@
           </a>
         </div>
 
-        <div class="link-item">
-          <a
-            href="https://open.spotify.com/artist/360hfHglIWPnOe02nfLiK1?si=UwJNryQQSiqagwOduFoE4A"
-            target="_blank"
-            rel="noopener"
-            class="link-button"
+        <div class="link-item spotify-item" id="spotifyItem">
+          <button
+            class="link-button spotify-toggle"
+            id="spotifyToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="spotifyPanel"
+            onclick="toggleSpotify()"
           >
             <span class="link-icon"><i class="fab fa-spotify"></i></span>
             <div class="link-text">
               <span>Spotify</span>
               <span>Music Profile</span>
             </div>
-          </a>
+            <span class="spotify-chevron" aria-hidden="true">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </button>
+          <div
+            class="spotify-panel"
+            id="spotifyPanel"
+            role="region"
+            aria-label="Spotify player"
+            inert
+          >
+            <div class="spotify-panel-inner">
+              <div class="spotify-embed-wrap">
+                <iframe
+                  class="spotify-embed"
+                  id="spotifyFrame"
+                  title="Spotify artist player"
+                  data-src="https://open.spotify.com/embed/artist/360hfHglIWPnOe02nfLiK1?utm_source=generator&theme=0"
+                  width="100%"
+                  height="352"
+                  frameborder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div class="spotify-actions">
+                <a
+                  class="spotify-action"
+                  href="https://open.spotify.com/artist/360hfHglIWPnOe02nfLiK1"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <i class="fab fa-spotify" aria-hidden="true"></i>
+                  Open in Spotify
+                </a>
+                <button
+                  class="spotify-action"
+                  type="button"
+                  onclick="copySpotifyLink()"
+                >
+                  <i class="fas fa-link" aria-hidden="true"></i>
+                  Copy link
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="link-item">
@@ -154,15 +202,63 @@
     <div id="toast" class="toast"></div>
 
     <script>
+      const SPOTIFY_PROFILE_URL =
+        "https://open.spotify.com/artist/360hfHglIWPnOe02nfLiK1";
+
+      function toggleSpotify() {
+        const item = document.getElementById("spotifyItem");
+        const toggle = document.getElementById("spotifyToggle");
+        const panel = document.getElementById("spotifyPanel");
+        const frame = document.getElementById("spotifyFrame");
+        const isOpen = item.classList.toggle("open");
+
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        if (isOpen) {
+          panel.removeAttribute("inert");
+          if (!frame.src || frame.src === "about:blank") {
+            frame.src = frame.dataset.src;
+          }
+        } else {
+          panel.setAttribute("inert", "");
+          frame.src = "about:blank";
+        }
+      }
+
+      function copySpotifyLink() {
+        copyToClipboard(SPOTIFY_PROFILE_URL);
+      }
+
       function copyToClipboard(text) {
-        navigator.clipboard
-          .writeText(text)
-          .then(() => {
-            showToast("Copied to clipboard");
-          })
-          .catch(() => {
-            showToast("Failed to copy");
-          });
+        const fallbackCopy = () => {
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.setAttribute("readonly", "");
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+
+          let copied = false;
+          try {
+            copied = document.execCommand("copy");
+          } catch {
+            copied = false;
+          }
+
+          textarea.remove();
+          showToast(copied ? "Copied to clipboard" : "Failed to copy");
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard
+            .writeText(text)
+            .then(() => {
+              showToast("Copied to clipboard");
+            })
+            .catch(fallbackCopy);
+        } else {
+          fallbackCopy();
+        }
       }
 
       function showToast(message) {
